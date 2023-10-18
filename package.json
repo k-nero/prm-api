@@ -1,15 +1,26 @@
 {
-  "name": "hi-elysia",
+  "name": "prm-api",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/bearer": "^0.7.0",
+    "@elysiajs/cors": "^0.7.1",
+    "@elysiajs/swagger": "^0.7.3",
+    "@libsql/client": "^0.3.5",
+    "drizzle-orm": "^0.28.6",
+    "elysia": "latest",
+    "mssql": "^10.0.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
+    "typescript-guid": "^1.0.3"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "^0.19.13"
   },
   "module": "src/index.js"
 }
