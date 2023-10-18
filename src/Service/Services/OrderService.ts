@@ -47,7 +47,6 @@ class OrderService implements IOrderService
         });
         return result;
     }
-    
 }
 
 export default OrderService;

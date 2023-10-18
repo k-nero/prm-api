@@ -19,6 +19,7 @@ app.use(swagger({
     tags: [
       { name: 'Account', description: 'Account API' },
       { name: 'Order', description: 'Order API' },
+      { name: 'Product', description: 'Product API' },
     ]
   }
 }));

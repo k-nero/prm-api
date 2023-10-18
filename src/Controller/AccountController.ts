@@ -14,12 +14,11 @@ const body = t.Object({
 });
 
 const elysia = new Elysia();
-elysia.decorate('accountService', new AccountService());
-
-elysia.get("/", async ({accountService}) => accountService.getAccounts(), {detail: detail});
-elysia.get("/:id", async ({accountService, params}) => accountService.getAccount(params.id), {detail: detail});
-elysia.post("/", async ({accountService, body}) => accountService.createAccount(body), {body: body, detail: detail});
-elysia.patch("/:id", async ({accountService, body, params}) => accountService.updateAccount(params.id, body), {body: body, detail: detail});
-elysia.delete("/:id", async ({accountService, params}) => accountService.deleteAccount(params.id), {detail: detail});
+elysia.decorate('accountService', new AccountService())
+.get("/", async ({accountService}) => accountService.getAccounts(), {detail: detail})
+.get("/:id", async ({accountService, params}) => accountService.getAccount(params.id), {detail: detail})
+.post("/", async ({accountService, body}) => accountService.createAccount(body), {body: body, detail: detail})
+.patch("/:id", async ({accountService, body, params}) => accountService.updateAccount(params.id, body), {body: body, detail: detail})
+.delete("/:id", async ({accountService, params}) => accountService.deleteAccount(params.id), {detail: detail});
 
 export default elysia;
