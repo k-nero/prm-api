@@ -1,4 +1,4 @@
-import "reflect-metadata"; 
+import "reflect-metadata";
 import { Elysia } from "elysia";
 import { cors } from '@elysiajs/cors'
 import { swagger } from '@elysiajs/swagger'
@@ -10,12 +10,16 @@ app.use(cors());
 app.use(swagger({
   path: '/swagger',
   autoDarkMode: false,
-  documentation:{
+  documentation: {
     info: {
-      title: 'Elysia',
-      description: 'Elysia API',
+      title: 'ElysiaJS API',
+      description: 'ElysiaJS API for PRM',
       version: '1.0.0',
-    }
+    },
+    tags: [
+      { name: 'Account', description: 'Account API' },
+      { name: 'Order', description: 'Order API' },
+    ]
   }
 }));
 

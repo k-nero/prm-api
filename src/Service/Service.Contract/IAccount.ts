@@ -1,12 +1,11 @@
-
 interface AccountModel 
 {
-    Id: string;
     Username: string;
     Password: string;
-    Fullname: string;
     Avatar: string;
     RoleName: string;
+    CreatedAt?: Date;
+    UpdatedAt?: Date;
 }
 
 interface IAccountService 

@@ -1,19 +1,19 @@
 import { AccountModel, IAccountService } from "../Service.Contract/IAccount"
 import db from "../../Repository/DbContext";
-import Account from "../../Repository/Entities/Account";
-import { Guid } from "typescript-guid";
+import { Account } from "../../Repository/Entities/Account";
 import { eq } from "drizzle-orm";
 
 class AccountService implements IAccountService 
 {
     async createAccount(account: AccountModel): Promise<string> 
     {
-        account.Id = Guid.create().toString();
-        await db.insert(Account).values(account).execute();
-        return account.Id;
+        account.CreatedAt = new Date();
+        var result = await db.insert(Account).values(account).returning().get();
+        return result.Id;
     }
     async updateAccount(id: string, account: AccountModel): Promise<number>
     {
+        account.UpdatedAt = new Date();
         var result = await db.update(Account).set(account).where(eq(Account.Id, id)).execute();
         return result.rowsAffected;
     }
@@ -24,12 +24,15 @@ class AccountService implements IAccountService
     }
     async getAccount(accountId: string): Promise<any>
     {
-        var account = await db.select().from(Account).where(eq(Account.Id, accountId)).limit(1).execute();
-        return account;
+        var result = await db.query.Account.findFirst({
+            where: eq(Account.Id, accountId)
+        }).execute();
+        return result;
     }
     async getAccounts(): Promise<any[]> 
     {
-        return await db.select().from(Account).execute();
+        var result = await db.query.Account.findMany().execute();
+        return result;
     }
 
 }
