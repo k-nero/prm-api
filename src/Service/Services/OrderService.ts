@@ -26,7 +26,8 @@ class OrderService implements IOrderService
     {
         var result = await db.query.Orders.findFirst({
             with: {
-                account: true
+                account: true,
+                orderDetails: true
             },
             columns: {
                 AccountId: false,
@@ -42,7 +43,8 @@ class OrderService implements IOrderService
                 AccountId: false,
             },
             with: {
-                account: true
+                account: true,
+                orderDetails: true
             }
         });
         return result;
