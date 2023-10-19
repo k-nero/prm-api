@@ -14,11 +14,12 @@ const body = t.Object({
 
 const elysia = new Elysia();
 elysia.decorate('productService', new ProductService())
-
-.get("/", async ({productService}) => productService.getProducts(), {detail: detail})
-.get("/:id", async ({productService, params}) => productService.getProduct(params.id), {detail: detail})
-.post("/", async ({productService, body}) => productService.createProduct(body), {body: body, detail: detail})
-.patch("/:id", async ({productService, body, params}) => productService.updateProduct(params.id, body), {body: body, detail: detail})
-.delete("/:id", async ({productService, params}) => productService.deleteProduct(params.id), {detail: detail});
+.guard({detail: detail}, app => app    
+    .get("/", async ({productService}) => productService.getProducts())
+    .get("/:id", async ({productService, params}) => productService.getProduct(params.id))
+    .delete("/:id", async ({productService, params}) => productService.deleteProduct(params.id)))
+.guard({body: body, detail: detail}, app => app 
+    .post("/", async ({productService, body}) => productService.createProduct(body))
+    .patch("/:id", async ({productService, body, params}) => productService.updateProduct(params.id, body)));
 
 export default elysia;
