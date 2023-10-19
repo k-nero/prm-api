@@ -1,27 +1,28 @@
+import "reflect-metadata"
 import { Context } from "elysia";
 
-async function authorize(ctx: Context) {
-    var token = ctx.bearer;
+async function authorize(context: Context) {
+    var token = context.bearer;
     if(token == null) 
     {
-        ctx.set.status = 401;
-        ctx.set.headers['WWW-Authenticate'] = 'Bearer';
+        context.set.status = 401;
+        context.set.headers['WWW-Authenticate'] = 'Bearer';
         return "Unauthorized";
     }
 
-    var user = await ctx.jwt.verify(token);
+    var user = await context.jwt.verify(token);
     if(user == null)
     {
-        ctx.set.status = 401;
-        ctx.set.headers['WWW-Authenticate'] = 'Bearer';
+        context.set.status = 401;
+        context.set.headers['WWW-Authenticate'] = 'Bearer';
         return "Unauthorized";
     }
 
-    ctx.store.user = user;
+    context.store.user = user;
 
     if(user.RoleName != "admin")
     {
-        ctx.set.status = 403;
+        context.set.status = 403;
         return "Forbidden";
     }
 }

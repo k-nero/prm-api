@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { Elysia } from "elysia";
 import AccountController from "./AccountController";
 import OrderController from "./OrderController";

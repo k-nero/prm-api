@@ -17,6 +17,10 @@ app.use(swagger({
       description: 'ElysiaJS API for PRM',
       version: '1.0.0',
     },
+    externalDocs: {
+      url: 'https://elysiajs.com',
+      description: 'Find more info here',
+    },
     tags: [
       { name: 'Account', description: 'Account API' },
       { name: 'Order', description: 'Order API' },
@@ -24,9 +28,7 @@ app.use(swagger({
       { name: 'Authenticate', description: 'Authenticate API' },
     ],
     openapi: '3.0.3',
-    security: [ { Authorization: [
-     
-    ] }],
+    security: [ { Authorization: [] }],
     components: {
       securitySchemes: {
         Authorization: {

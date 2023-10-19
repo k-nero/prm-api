@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { Elysia, t } from "elysia"
 import  AuthenticateSerivce  from "../Service/Services/AuthenticateService";
 
