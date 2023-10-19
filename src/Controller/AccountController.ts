@@ -21,7 +21,7 @@ elysia.decorate('accountService', new AccountService())
     .get("/", async ({accountService}) => accountService.getAccounts())
     .get("/:id", async ({accountService, params}) => accountService.getAccount(params.id))
     .delete("/:id", async ({accountService, params}) => accountService.deleteAccount(params.id)))
-.guard({body: body, detail: detail}, app => app
+.guard({body: body, detail: detail, beforeHandle: authorize}, app => app
     .post("/", async ({accountService, body}) => accountService.createAccount(body))
     .patch("/:id", async ({accountService, body, params}) => accountService.updateAccount(params.id, body)));
 

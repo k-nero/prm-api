@@ -1,6 +1,6 @@
 import { Context } from "elysia";
 
-const authorize = async (ctx: Context) => {
+async function authorize(ctx: Context) {
     var token = ctx.bearer;
     if(token == null) 
     {
@@ -16,6 +16,8 @@ const authorize = async (ctx: Context) => {
         ctx.set.headers['WWW-Authenticate'] = 'Bearer';
         return "Unauthorized";
     }
+
+    ctx.store.user = user;
 
     if(user.RoleName != "admin")
     {
