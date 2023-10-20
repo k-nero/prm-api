@@ -9,7 +9,7 @@ class AuthenticateSerivce implements IAuthenticateService
     async login(authenticateModel: IAuthenticateModel): Promise<any>
     {
         var user = await db.query.Account.findFirst({
-            where: eq(Account.Username, authenticateModel.Username)
+            where: eq(Account.Username, authenticateModel.username)
         }).execute();
         
         if(user == null)
@@ -17,7 +17,7 @@ class AuthenticateSerivce implements IAuthenticateService
             throw new Error("User not found.");
         }
 
-        const validPassword = await compare(authenticateModel.Password, user.Password);
+        const validPassword = await compare(authenticateModel.password, user.Password);
         if(!validPassword)
         {
             throw new Error("Invalid password.");
@@ -28,7 +28,7 @@ class AuthenticateSerivce implements IAuthenticateService
     async register(authenticateModel: IAuthenticateModel): Promise<any>
     {
         var user = db.query.Account.findFirst({
-            where: eq(Account.Username, authenticateModel.Username)
+            where: eq(Account.Username, authenticateModel.username)
         }).execute();
 
         if(user == null)
@@ -37,10 +37,10 @@ class AuthenticateSerivce implements IAuthenticateService
         }
 
         const salt = await genSalt(10);
-        const hashedPassword = await hash(authenticateModel.Password, salt);
+        const hashedPassword = await hash(authenticateModel.password, salt);
 
         var result = await db.insert(Account).values({
-            Username: authenticateModel.Username,
+            Username: authenticateModel.username,
             Password: hashedPassword,
             CreatedAt: new Date()
         }).returning().get();

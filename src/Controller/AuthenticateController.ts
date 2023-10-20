@@ -3,8 +3,8 @@ import { Elysia, t } from "elysia"
 import  AuthenticateSerivce  from "../Service/Services/AuthenticateService";
 
 const body = t.Object({
-    Username: t.String(),
-    Password: t.String()
+    username: t.String(),
+    password: t.String()
 });
 
 const detail = {
@@ -15,7 +15,8 @@ const elysia = new Elysia();
 elysia.decorate('authenticateService', new AuthenticateSerivce())
 .post("/login", async ({ body, jwt, authenticateService }) => { 
     var result = await authenticateService.login(body);
-    return jwt.sign(result);
+    //return jwt.sign(result);
+    return result;
  }, { body: body, detail: detail })
 .post("/register", async ({ body, jwt, authenticateService }) => {
     var result = await authenticateService.register(body);

@@ -1,7 +1,7 @@
 interface IAuthenticateModel 
 {
-    Username: string;
-    Password: string;
+    username: string;
+    password: string;
 }
 
 interface IAuthenticateService 
